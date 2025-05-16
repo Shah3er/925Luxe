@@ -1,8 +1,10 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import stripe
 
-stripe.api_key = "SECRET KEY HERE"
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+
 
 app = Flask(__name__)
 CORS(app)
