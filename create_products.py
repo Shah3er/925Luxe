@@ -1,6 +1,6 @@
 import stripe
 
-stripe.api_key = "sk_test_51RKOjYFLy2fLmwrk9xXGnIRn0zH1YvClcIajMda1ySNOYDqAA7FBz0JkuHHHXiZorSfwSl5ldfVIxbJ0MWSH5glQ00b8nl6ThV"
+stripe.api_key = "SECRET KEY HERE"
 
 # Stripe Product ID for Cuban Link Chain
 cuban_chain_product_id = "prod_SHVaYPi6wFwyMe"  # Replace with your actual Product ID
