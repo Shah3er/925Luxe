@@ -1,6 +1,7 @@
+import os
 import stripe
 
-stripe.api_key = "SECRET KEY HERE"
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 # Stripe Product ID for Cuban Link Chain
 cuban_chain_product_id = "prod_SHVaYPi6wFwyMe"  # Replace with your actual Product ID
