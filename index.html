@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>925 Luxe | Premium Moissanite Jewelry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+   <script src="https://js.stripe.com/v3/"></script>
+  <style>
+   /* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #0B1F3A;
+  color: #FFFFFF;
+}
+
+/* Header */
+header {
+  background-color: #0B1F3A;
+  color: #FFFFFF;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideFadeIn 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(-30px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+@keyframes slideFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+}
+
+nav a {
+  color: #FFFFFF;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #B2D8F1;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Product Section */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+}
+
+.product-card {
+  border: 1px solid #C0C0C0;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+  color: #1A1A1A;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.product-card h3 {
+  font-size: 1.2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.product-card p {
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+footer {
+  background-color: #0B1F3A;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #FFFFFF;
+  color: #1A1A1A;
+  padding: 2rem;
+  max-width: 800px;
+  width: 90%;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal-details h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-details p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.modal-details label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+.modal-content img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Select Inputs Styling */
+select {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1px solid #C0C0C0;
+  border-radius: 8px;
+  background-color: #F9F9F9;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #0B1F3A;
+  outline: none;
+}
+
+/* Shared Button Styling */
+#addToCartBtn, #buyNowBtn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Add to Cart - Dark Button with White Text */
+#addToCartBtn {
+  background-color: #0B1F3A; /* Deep Navy */
+  color: #FFFFFF;
+}
+
+#addToCartBtn:hover {
+  background-color: #081529; /* Darker Navy on hover */
+}
+
+/* Buy Now - White Button with Black Text and Border */
+#buyNowBtn {
+  background-color: #FFFFFF;   /* White background */
+  color: #0B1F3A;              /* Navy text */
+  border: 1px solid #0B1F3A;   /* Optional border for contrast */
+}
+
+#buyNowBtn:hover {
+  background-color: #E0E0E0;   /* Light gray on hover */
+}
+
+
+/* Cart Panel */
+#cartPanel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  transition: right 0.3s ease;
+  z-index: 9999;
+  padding: 1rem;
+  overflow-y: auto;
+  color: #0B1F3A; /* Ensure text is navy by default */
+}
+
+/* Apply to all nested elements */
+#cartPanel * {
+  color: #0B1F3A;
+}
+
+
+#cartPanel.open {
+  right: 0;
+}
+
+#cartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#closeCart {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#cartItems {
+  list-style: none;
+  padding: 0;
+}
+
+#cartItems li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+#cartFooter {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+#cartCheckoutBtn {
+  background-color: #0B1F3A;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#cartCheckoutBtn:hover {
+  background-color: #081529;
+}
+
+#cartTotal {
+  text-align: right;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+#cartBtn {
+  position: relative;
+  background-color: #FFFFFF;
+  color: #0B1F3A;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  margin-left: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+#cartBtn:hover {
+  background-color: #E0E0E0;
+}
+
+#cartCount {
+  background-color: red;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  top: -8px;
+  right: -16px;
+}
+
+/* Payment Section */
+#payment {
+  background-color: #B2D8F1;
+  padding: 4rem 2rem;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  color: #1A1A1A;
+}
+
+#payment h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1A1A1A;
+}
+
+#payment p {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+#payment img {
+  width: 200px;
+  margin-bottom: 2rem;
+}
+
+#payment #checkoutBtn {
+  background-color: #0B1F3A;
+  color: #FFFFFF;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#payment #checkoutBtn:hover {
+  background-color: #081529;
+}
+
+.modal-img-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+.modal-img-container .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+}
+
+#prevImg {
+  left: 10px;
+}
+
+#nextImg {
+  right: 10px;
+}
+
+#buyNowBtn {
+  background-color: #FFFFFF;    /* White background */
+  color: #0B1F3A;               /* Navy text */
+  border: 1px solid #0B1F3A;    /* Optional border */
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#buyNowBtn:hover {
+  background-color: #E0E0E0;    /* Light gray on hover */
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>925 Luxe</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#cart" id="cartBtn">
+        🛒 Cart <span id="cartCount" style="display:none;">0</span>
+      </a>      
+      
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+  <img src="Images/banner.png" alt="925 Luxe Banner">
+</section>
+
+    <div></div>
+  </section>
+
+  <section id="shop" class="products">
+    <!-- 20 Product Cards -->
+    <div class="product-card" data-title="Round Cut Moissanite Ring"><img src="Images/Ring.png" alt="Moissanite Ring"><h3>Round Cut Moissanite Ring</h3><p>$90.00</p></div>
+<div class="product-card" data-title="925 Italian Sterling Silver Chain"><img src="Images/Silver.png" alt="925 Italian Sterling Silver Chain"><h3>925 Italian Sterling Silver Chain</h3><p>$60.00</p></div>
+<div class="product-card" data-title="Infinite Moissanite Bracelet"><img src="Images/Bracelet.png" alt="Moissanite Bracelet"><h3>Infinite Moissanite Bracelet</h3><p>$100.00</p></div>
+<div class="product-card" data-title="Moissanite Earrings"><img src="Images/Earrings.png" alt="Moissanite Earrings"><h3>Moissanite Earrings</h3><p>$120.00</p></div>
+<div class="product-card" data-title="Solar Round Cut Moissanite Ring"><img src="Images/Roundcut1.png" alt="Solar Round Cut Moissanite Ring"><h3>Solar Round Cut Moissanite Ring</h3><p>$90.00</p></div>
+<div class="product-card" data-title="Wedding Band"><img src="Images/Band.png" alt="Wedding Band"><h3>Wedding Band</h3><p>$60.00</p></div>
+<div class="product-card" data-title="Cuban Link Chain"><img src="Images/Cuban.png" alt="Cuban Link Chain"><h3>Cuban Link Chain</h3><p>$60.00</p></div>
+<div class="product-card" data-title="Solara 1 Carat Moissanite Solitaire Necklace"><img src="Images/Necklace.png" alt="Solara 1 Carat Moissanite Solitaire Necklace"><h3>Solara 1 Carat Moissanite Solitaire Necklace</h3><p>$90.00</p></div>
+<div class="product-card" data-title="Emerald Cut Moissanite Ring"><img src="Images/EmeraldCut.png" alt="Emerald Cut Moissanite Ring"><h3>Emerald Cut Moissanite Ring</h3><p>$110.00</p></div>
+<div class="product-card" data-title="Men Moissanite Ring"><img src="Images/MenRing.png" alt="Men Moissanite Ring"><h3>Men Moissanite Ring</h3><p>$90.00</p></div>
+<div class="product-card" data-title="5 Stone Moissanite Ring"><img src="Images/FiveStone.png" alt="5 Stone Moissanite Ring"><h3>5 Stone Moissanite Ring</h3><p>$170.00</p></div>
+<div class="product-card" data-title="Stellar Round Cut Moissanite Ring"><img src="Images/Roundcut2.png" alt="Stellar Round Cut Moissanite Ring"><h3>Stellar Round Cut Moissanite Ring</h3><p>$110.00</p></div>
+<div class="product-card" data-title="Lunar Earrings"><img src="Images/LunarEarrings.png" alt="Lunar Earrings"><h3>Lunar Earrings</h3><p>$120.00</p></div>
+<div class="product-card" data-title="One Star Bracelet"><img src="Images/OneStar.png" alt="One Star Bracelet"><h3>One Star Bracelet</h3><p>$90.00</p></div>
+<div class="product-card" data-title="Three Stone Moissanite Ring"><img src="Images/ThreeStone.png" alt="Three Stone Moissanite Ring"><h3>Three Stone Moissanite Ring</h3><p>$150.00</p></div>
+<div class="product-card" data-title="Charmful Moissanite Ring"><img src="Images/Charmful.png" alt="Charmful Moissanite Ring"><h3>Charmful Moissanite Ring</h3><p>$90.00</p></div>
+<div class="product-card" data-title="The Eternal Grace Ring"><img src="Images/EternalGrace.png" alt="The Eternal Grace Ring"><h3>The Eternal Grace Ring</h3><p>$90.00</p></div>
+<div class="product-card" data-title="Hexa Crown Moissanite Ring"><img src="Images/HexaCrown.png" alt="Hexa Crown Moissanite Ring"><h3>Hexa Crown Moissanite Ring</h3><p>$90.00</p></div>
+<div class="product-card" data-title="Radiant Cut Moissanite Ring"><img src="Images/RadiantCut.png" alt="Radiant Cut Moissanite Ring"><h3>Radiant Cut Moissanite Ring</h3><p>$110.00</p></div>
+<div class="product-card" data-title="Celeste Halos"><img src="Images/CelesteHalos.png" alt="Celeste Halos"><h3>Celeste Halos</h3><p>$110.00</p></div>
+<div class="product-card" data-title="Celestial Curls"><img src="Images/CelestialCurls.png" alt="Celestial Curls"><h3>Celestial Curls</h3><p>$140.00</p></div>
+<div class="product-card" data-title="The Regal Heart"><img src="Images/heart.png" alt="The Regal Heart"><h3>The Regal Heart</h3><p>$90.00</p></div>
+<div class="product-card" data-title="The Timeless Oval"><img src="Images/Goose.png" alt="The Timeless Oval"><h3>The Timeless Oval</h3><p>$90.00</p></div>
+<div class="product-card" data-title="Starlight Studs"><img src="Images/StarlightStuds.png" alt="Starlight Studs"><h3>Starlight Studs</h3><p>$100.00</p></div>
+
+  </section>
+
+  <section id="about" style="background-color: #0B1F3A; padding: 4rem 2rem;">
+    <div style="max-width: 900px; margin: auto; text-align: center;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; color: #ffffff;">
+        About 925 Luxe
+      </h2>
+      <p style="font-size: 1.1rem; color: #ffffff; line-height: 1.8;">
+        At <strong>925 Luxe</strong>, we believe elegance should be accessible to everyone. Based in Canada, our brand
+        is rooted in the timeless beauty of <strong>925 sterling silver</strong> and the brilliance of ethically sourced
+        <strong>VVS1 moissanite</strong>. Each piece is hand-selected to meet the highest standards in quality, durability,
+        and shine, because luxury shouldn't come at a luxury price.
+      </p>
+      <p style="font-size: 1.1rem; color: #ffffff; line-height: 1.8; margin-top: 1rem;">
+        Whether you’re gifting a loved one or treating yourself, we’re here to deliver sophisticated sparkle,
+        modern designs, and jewelry that lasts. <br><br><em>Designed to shine. Made to last.</em>
+      </p>
+    </div>
+  </section>
+  
+
+  <section id="contact" style="background-color: #0B1F3A; padding: 4rem 2rem; border-top: 1px solid #0B1F3A;">
+    <div style="max-width: 800px; margin: auto; text-align: center;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; color: #ffffff;">
+        Get in Touch
+      </h2>
+      <p style="font-size: 1.1rem; color: #ffffff; line-height: 1.8;">
+        Have a question, a custom order request, or need help finding the perfect piece? 
+        Our team is here to help you with anything you need.
+      </p>
+  
+      <div style="margin-top: 2rem;">
+        <p style="font-size: 1.05rem; margin-bottom: 0.5rem;">
+          📧 Email us at: 
+          <a href="mailto:925luxejewelry@gmail.com" style="color: #007bff; text-decoration: none;">925luxejewelry@gmail.com</a>
+        </p>
+        <p style="font-size: 1.05rem;">
+          📸 Message us on Instagram: 
+          <a href="https://instagram.com/925luxe" target="_blank" style="color: #007bff; text-decoration: none;">@925luxe</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="payment" style="background-color: #0B1F3A; padding: 4rem 2rem; border-top: 1px solid #0B1F3A;">
+  <div style="max-width: 800px; margin: auto; text-align: center;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; color: #ffffff;">
+      Secure Payment Options
+    </h2>
+    <p style="font-size: 1.1rem; color: #ffffff; line-height: 1.8; margin-bottom: 2rem;">
+      We accept all major credit and debit cards, powered by <strong>Stripe</strong>, the world’s leading secure payment processor.
+    </p>
+    <img src="Images/Stripe.png" alt="Stripe Payments" style="width: 200px; margin-bottom: 2rem;">
+    <br>
+    <button id="checkoutBtn" style="background-color: #000; color: #fff; border: none; padding: 1rem 2rem; border-radius: 6px; cursor: pointer; font-size: 1rem;">
+      Proceed to Checkout
+    </button>
+  </div>
+</section>
+
+
+  <footer>
+    &copy; 2025 925 Luxe. All rights reserved.
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div id="cartPanel">
+    <div id="cartHeader">
+      <h2>Your Cart</h2>
+      <span id="closeCart">&times;</span>
+    </div>
+    <ul id="cartItems"></ul>
+
+<div id="cartTotal">
+  <strong>Total: $<span id="totalPrice">0.00</span></strong>
+</div>
+
+<div id="cartFooter">
+  <button id="cartCheckoutBtn">Buy Now</button>
+</div>
+
+  
+<button id="stripeCheckoutBtn" style="display:none;">Proceed to Payment</button>
+
+
+ <!-- Modal Element -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    
+    <div class="modal-img-container">
+      <img id="modalImage" src="" alt="Product Image">
+      <span id="prevImg" class="arrow">&#10094;</span>
+      <span id="nextImg" class="arrow">&#10095;</span>
+    </div>
+    
+    <div class="modal-details">
+      <h2 id="modalTitle">Product Title</h2>
+      <p id="modalPrice">$0.00</p>
+      <p id="modalDesc">This premium piece features VVS1 Moissanite on 925 Sterling Silver. Certified and diamond-tested.</p>
+      
+      <!-- Ring Options -->
+      <div id="ringOptions">
+        <label for="sizeSelect" style="display: block; margin-top: 1rem;">Select Ring Size:</label>
+        <select id="sizeSelect" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;">
+          <option value="5">Size 5</option>
+          <option value="6">Size 6</option>
+          <option value="7">Size 7</option>
+          <option value="8">Size 8</option>
+          <option value="9">Size 9</option>
+        </select>
+
+        <label for="caratSelect" style="display: block;">Select Carat:</label>
+        <select id="caratSelect" style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem;">
+          <option value="1">1 Carat</option>
+          <option value="2">2 Carat</option>
+          <option value="3">3 Carat</option>
+          <option value="4">4 Carat</option>
+          <option value="5">5 Carat</option>
+        </select>
+      </div>
+
+      <!-- Chain Options (Hidden by default) -->
+      <div id="chainOptions" style="display: none;">
+        <label for="lengthSelect" style="display: block; margin-top: 1rem;">Select Length (inches):</label>
+        <select id="lengthSelect" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;">
+          <option value="16">16 inches</option>
+          <option value="18">18 inches</option>
+          <option value="20">20 inches</option>
+          <option value="22">22 inches</option>
+          <option value="24">24 inches</option>
+        </select>
+
+        <label for="widthSelect" style="display: block;">Select Width (mm):</label>
+        <select id="widthSelect" style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem;">
+          <option value="2">2 mm</option>
+          <option value="3">3 mm</option>
+          <option value="4">4 mm</option>
+          <option value="5">5 mm</option>
+          <option value="6">6 mm</option>
+        </select>
+      </div>
+
+      <button id="addToCartBtn" style="background-color: #000; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; margin-right: 1rem;">
+        Add to Cart
+      </button>
+
+      <button id="buyNowBtn" style="background-color: #007bff; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer;">
+        Buy Now
+      </button>
+    </div> <!-- end .modal-details -->
+
+  </div> <!-- end .modal-content -->
+</div> <!-- end #productModal -->
+
+  
+
+  <!-- Interactivity Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+function resetSelectListener(selectElement) {
+  const newSelect = selectElement.cloneNode(true);
+  selectElement.parentNode.replaceChild(newSelect, selectElement);
+  return newSelect;
+}
+
+
+  const productDescriptions = {
+  "Round Cut Moissanite Ring": "A timeless round cut ring featuring VVS1 Moissanite on 925 Sterling Silver.",
+  "925 Italian Sterling Silver Chain": "Elegant and durable 925 sterling silver chain, perfect for daily wear.",
+  "Infinite Moissanite Bracelet": "Featuring infinite sparkle with premium VVS1 Moissanite stones.",
+  "Moissanite Earrings": "Classic moissanite earrings for everyday elegance and shine.",
+  "Solar Round Cut Moissanite Ring": "Solar-inspired brilliance with a classic round cut moissanite stone.",
+  "Wedding Band": "Minimalist 925 Sterling Silver wedding band designed for lasting comfort.",
+  "Cuban Link Chain": "A bold Cuban link chain crafted in 925 Sterling Silver.",
+  "Solara 1 Carat Moissanite Solitaire Necklace": "A solitaire moissanite pendant on a sleek silver chain.",
+  "Emerald Cut Moissanite Ring": "Elegant emerald cut moissanite ring with maximum brilliance.",
+  "Men Moissanite Ring": "Masculine style with a powerful moissanite centerpiece.",
+  "5 Stone Moissanite Ring": "Five stone design for added sparkle and meaning.",
+  "Stellar Round Cut Moissanite Ring": "A stellar design with celestial inspiration.",
+  "Lunar Earrings": "Inspired by lunar elegance with brilliant moissanite stones.",
+  "One Star Bracelet": "Single star charm bracelet, simple yet meaningful.",
+  "Three Stone Moissanite Ring": "Three stunning stones representing your past, present, and future.",
+  "Charmful Moissanite Ring": "Charming and playful design with moissanite sparkle.",
+  "The Eternal Grace Ring": "A ring symbolizing eternal beauty and grace.",
+  "Hexa Crown Moissanite Ring": "Unique hexa crown setting with a brilliant moissanite.",
+  "Radiant Cut Moissanite Ring": "Radiant cut stone designed to impress with every glance.",
+  "Celeste Halos": "A halo-inspired design with surrounding moissanite brilliance.",
+  "Celestial Curls": "Flowing curls inspired by the night sky, studded with moissanite.",
+  "The Regal Heart": "A heart-shaped moissanite centerpiece symbolizing love and elegance on 925 Sterling Silver.",
+  "The Timeless Oval": "An oval-cut moissanite ring designed for timeless sophistication and everyday beauty.",
+  "Starlight Studs": "Brilliant moissanite studs that capture the sparkle of a starlit night, perfect for any occasion."
+
+};
+
+// ✅ Italian Sterling Silver Chain (Length-Width Variants)
+const italianChainPriceIdMap = {
+  "16-2": "price_1ROUMAFLy2fLmwrkSrRc7Bvv",
+  "16-3": "price_1ROUMBFLy2fLmwrkLTpJ5QWc",
+  "16-4": "price_1ROUMBFLy2fLmwrkZbKDDYp7",
+  "16-5": "price_1ROUMBFLy2fLmwrkBCzgBx5d",
+  "16-6": "price_1ROUMBFLy2fLmwrkjDgwLoJz",
+
+  "18-2": "price_1ROUMBFLy2fLmwrkjDgwLoJz",
+  "18-3": "price_1ROUMCFLy2fLmwrk72VcRO0L",
+  "18-4": "price_1ROUMCFLy2fLmwrklLCmWBDx",
+  "18-5": "price_1ROUMCFLy2fLmwrkfkyAx3Py",
+  "18-6": "price_1ROUMCFLy2fLmwrkINDsgVLz",
+
+  "20-2": "price_1ROUMCFLy2fLmwrkzWBjzLmc",
+  "20-3": "price_1ROUMDFLy2fLmwrkc9HJP1hf",
+  "20-4": "price_1ROUMDFLy2fLmwrkc9HJP1hf",
+  "20-5": "price_1ROUMDFLy2fLmwrktANJQxL3",
+  "20-6": "price_1ROUMDFLy2fLmwrkdid9raMt",
+
+  "22-2": "price_1ROUMDFLy2fLmwrkOwEVXEZk",
+  "22-3": "price_1ROUMDFLy2fLmwrkQlkeVgPB",
+  "22-4": "price_1ROUMEFLy2fLmwrkTqPpkm00",
+  "22-5": "price_1ROUMEFLy2fLmwrk52BWaSuJ",
+  "22-6": "price_1ROUMEFLy2fLmwrkSOmqoRCC",
+
+  "24-2": "price_1ROUMEFLy2fLmwrkdjNS6uWA",
+  "24-3": "price_1ROUMEFLy2fLmwrkpAqlYl76",
+  "24-4": "price_1ROUMFFLy2fLmwrkjtGnkeLt",
+  "24-5": "price_1ROUMFFLy2fLmwrkcrczwrsw",
+  "24-6": "price_1ROUMFFLy2fLmwrkNTJhZ3Lv",
+};
+
+// ✅ Cuban Link Chain (Length Only, Fixed 14mm Width)
+const cubanChainPriceIdMap = {
+  "16": "price_1ROUPhFLy2fLmwrkAvbwIa7b",
+  "18": "price_1ROUPhFLy2fLmwrk4F7WFRsG",
+  "20": "price_1ROUPiFLy2fLmwrk0KbrxpSF",
+  "22": "price_1ROUPiFLy2fLmwrkvyRqZPen",
+  "24": "price_1ROUPiFLy2fLmwrkYpOwAcXj",
+};
+
+const caratPriceIdMap = {
+  "Round Cut Moissanite Ring": {
+    "1": "price_1ROUI7FLy2fLmwrkye4lzUft",
+    "2": "price_1ROUI7FLy2fLmwrkxMQ556eK",
+    "3": "price_1ROUI7FLy2fLmwrkCbOwqXxl",
+    "4": "price_1ROUI7FLy2fLmwrkZwEWf9tr",
+    "5": "price_1ROUI7FLy2fLmwrkLf5HcZqD"
+  },
+
+  "Solar Round Cut Moissanite Ring": {
+    "1": "price_1ROUI9FLy2fLmwrk0dPwukBP",
+    "2": "price_1ROUI9FLy2fLmwrk8859tz6C",
+    "3": "price_1ROUIAFLy2fLmwrkZqJAyWUV",
+    "4": "price_1ROUIAFLy2fLmwrktvkQ6p8S",
+    "5": "price_1ROUIAFLy2fLmwrkfZBi5W86"
+  },
+  "Solara 1 Carat Moissanite Solitaire Necklace": {
+    "1": "price_1ROUIAFLy2fLmwrksFyib1gN",
+    "2": "price_1ROUIAFLy2fLmwrkWFMxz2Xe",
+    "3": "price_1ROUIBFLy2fLmwrkQbl8jim4",
+    "4": "price_1ROUIBFLy2fLmwrkl5d8cSQM",
+    "5": "price_1ROUIBFLy2fLmwrkPxw2iyZd"
+  },
+  "Emerald Cut Moissanite Ring": {
+    "1": "price_1ROUIBFLy2fLmwrkEHGWUgK8",
+    "2": "price_1ROUIBFLy2fLmwrkFWIYP7Je",
+    "3": "price_1ROUIBFLy2fLmwrk5rrhzYGW",
+    "4": "price_1ROUICFLy2fLmwrk3FrYR7oT",
+    "5": "price_1ROUICFLy2fLmwrkXWgsEZDU"
+  },
+  "Men Moissanite Ring": {
+    "1": "price_1ROUICFLy2fLmwrkpdqEaug2",
+    "2": "price_1ROUICFLy2fLmwrkG2ws79Z2",
+    "3": "price_1ROUICFLy2fLmwrkBE2r4mV6",
+    "4": "price_1ROUICFLy2fLmwrkOPs8V0aP",
+    "5": "price_1ROUIDFLy2fLmwrkPBT5Pt4P"
+  },
+  "Stellar Round Cut Moissanite Ring": {
+    "1": "price_1ROUIDFLy2fLmwrkwWYR0emW",
+    "2": "price_1ROUIDFLy2fLmwrkz20UA1CH",
+    "3": "price_1ROUIDFLy2fLmwrk8ig3NbbG",
+    "4": "price_1ROUIDFLy2fLmwrko6YtVcQa",
+    "5": "price_1ROUIDFLy2fLmwrkKn5xBHCl"
+  },
+  "Charmful Moissanite Ring": {
+    "1": "price_1ROUIEFLy2fLmwrkxj4UVlIf",
+    "2": "price_1ROUIEFLy2fLmwrkVwveH2DG",
+    "3": "price_1ROUIEFLy2fLmwrkCeweJclk",
+    "4": "price_1ROUIEFLy2fLmwrkhJgj7Uye",
+    "5": "price_1ROUIEFLy2fLmwrkAjkZbTwZ"
+  },
+  "The Eternal Grace Ring": {
+    "1": "price_1ROUIEFLy2fLmwrkvU7taYAc",
+    "2": "price_1ROUIFFLy2fLmwrkL82Q37Iy",
+    "3": "price_1ROUIFFLy2fLmwrk0cpWsT8Q",
+    "4": "price_1ROUIFFLy2fLmwrks7NGSGAs",
+    "5": "price_1ROUIFFLy2fLmwrk41JDTgQU"
+  },
+  "Hexa Crown Moissanite Ring": {
+    "1": "price_1ROUIFFLy2fLmwrk9iAT9HT1",
+    "2": "price_1ROUIFFLy2fLmwrkmXcjZWUE",
+    "3": "price_1ROUIGFLy2fLmwrklftRqg7k",
+    "4": "price_1ROUIGFLy2fLmwrkosJkcm9C",
+    "5": "price_1ROUIGFLy2fLmwrkjRN1T4xd"
+  },
+  "Radiant Cut Moissanite Ring": {
+    "1": "price_1ROUIGFLy2fLmwrkmpozsBIx",
+    "2": "price_1ROUIGFLy2fLmwrk08ppvfjV",
+    "3": "price_1ROUIGFLy2fLmwrk9kNWZgxc",
+    "4": "price_1ROUIHFLy2fLmwrk6JvBI4Lr",
+    "5": "price_1ROUIHFLy2fLmwrksasg8iO0"
+  },
+  "The Regal Heart": {
+    "1": "price_1ROUIHFLy2fLmwrk6s8yt3s4",
+    "2": "price_1ROUIHFLy2fLmwrk5xfdEBNG",
+    "3": "price_1ROUIHFLy2fLmwrke9rQXKWa",
+    "4": "price_1ROUIHFLy2fLmwrkw8oYVe8C",
+    "5": "price_1ROUIIFLy2fLmwrkrMJwVGQS"
+  },
+  "The Timeless Oval": {
+    "1": "price_1ROUIIFLy2fLmwrkUfVmSr3o",
+    "2": "price_1ROUIIFLy2fLmwrkhQt7AIXU",
+    "3": "price_1ROUIIFLy2fLmwrkiuRSbWVJ",
+    "4": "price_1ROUIIFLy2fLmwrkoMae9iLi",
+    "5": "price_1ROUIJFLy2fLmwrkGsF0ahoz"
+  },
+  "Starlight Studs": {
+    "1": "price_1ROUIJFLy2fLmwrk3QPmAVtE",
+    "2": "price_1ROUIJFLy2fLmwrksJdtUQt5",
+    "3": "price_1ROUIJFLy2fLmwrks6qEcpvs",
+    "4": "price_1ROUIJFLy2fLmwrkbrYQ0Yfv",
+    "5": "price_1ROUIJFLy2fLmwrksSz7rodH"
+  }
+};
+
+
+  const priceIdMap = {
+  "Round Cut Moissanite Ring": "price_1RMwYrFLy2fLmwrkQ1WvkSgC",
+  "925 Italian Sterling Silver Chain": "price_1RMwYsFLy2fLmwrkjmIBW4Ju",
+  "Infinite Moissanite Bracelet": "price_1RMwYsFLy2fLmwrkkxAt9hAw",
+  "Moissanite Earrings": "price_1RMwYsFLy2fLmwrknIAKL68F",
+  "Solar Round Cut Moissanite Ring": "price_1RMwYtFLy2fLmwrk6IOutT7q",
+  "Wedding Band": "price_1RMwYtFLy2fLmwrktyr6fwbi",
+  "Cuban Link Chain": "price_1RMwYtFLy2fLmwrkGXKRNHbX",
+  "Solara 1 Carat Moissanite Solitaire Necklace": "price_1RMwYuFLy2fLmwrkG899xQdx",
+  "Emerald Cut Moissanite Ring": "price_1RMwYuFLy2fLmwrkkTXA7wT0",
+  "Men Moissanite Ring": "price_1RMwYuFLy2fLmwrkGYzofONX",
+  "5 Stone Moissanite Ring": "price_1RMwYvFLy2fLmwrklHFywvJd",
+  "Stellar Round Cut Moissanite Ring": "price_1RMwYvFLy2fLmwrkdTd7S0xo",
+  "Lunar Earrings": "price_1RMwYvFLy2fLmwrkfgNON625",
+  "One Star Bracelet": "price_1RMwYwFLy2fLmwrkYunMKg0P",
+  "Three Stone Moissanite Ring": "price_1RMwYwFLy2fLmwrkLHDCm45Y",
+  "Charmful Moissanite Ring": "price_1RMwYwFLy2fLmwrkPMtq2WC7",
+  "The Eternal Grace Ring": "price_1RMwYxFLy2fLmwrkQpMAZdE1",
+  "Hexa Crown Moissanite Ring": "price_1RMwYxFLy2fLmwrkM3TeebaP",
+  "Radiant Cut Moissanite Ring": "price_1RMwYxFLy2fLmwrkNtiqU1fp",
+  "Celeste Halos": "price_1RMwYyFLy2fLmwrkwhSuGoGJ",
+  "Celestial Curls": "price_1RMwYyFLy2fLmwrko9Y0QrVp",
+  "The Regal Heart": "price_1ROPbIFLy2fLmwrkdZR5c1kd",
+  "The Timeless Oval": "price_1ROPbIFLy2fLmwrkzRTo0UZL",
+  "Starlight Studs": "price_1ROPbJFLy2fLmwrkeFsjVo1b"
+
+
+  // Add all your products and their corresponding price IDs
+};
+
+    const modal = document.getElementById("productModal");
+    const modalImg = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalDesc = document.getElementById("modalDesc");
+    const closeBtn = document.querySelector(".modal .close");
+    const productImages = {
+      "Round Cut Moissanite Ring": [
+      "Images/Ring.png",
+      "Images/Ring11.png",
+      "Images/Ring12.png",
+      "Images/Ring13.png",
+      "Images/Ring14.png",
+      "Images/Ring15.png",
+      "Images/Ring16.png",
+      "Images/Ring17.png",
+      "Images/Ring18.png",
+    ],
+    "925 Italian Sterling Silver Chain": [
+      "Images/Silver.png",
+      "Images/Silver2.jpg",
+      "Images/Silver3.jpg",
+      "Images/Silver4.jpg",
+      "Images/Silver5.jpg",
+      "Images/Silver6.jpg",
+      "Images/Silver7.jpg",
+      "Images/Silver8.jpg",
+      "Images/Silver9.jpg",
+      "Images/Silver10.jpg",
+
+    ],
+    "Infinite Moissanite Bracelet": [
+      "Images/Bracelet.png",
+      "Images/Bracelet1.png",
+      "Images/Bracelet2.png",
+      "Images/Bracelet3.png",
+      "Images/Bracelet4.png",
+    ],
+
+    "Moissanite Earrings": [
+      "Images/Earrings.png",
+      "Images/Earrings1.png",
+      "Images/Earrings2.png",
+      "Images/Earrings3.png",
+      "Images/Earrings4.png",
+    ],
+
+    "Solar Round Cut Moissanite Ring": [
+      "Images/Roundcut1.png",
+      "Images/RoundRing.png",
+      "Images/RoundRing1.png",
+      "Images/RoundRing2.png",
+      "Images/RoundRing3.png",
+      "Images/RoundRing4.png",
+      "Images/RoundRing5.png",
+      "Images/RoundRing6.png",
+      "Images/RoundRing7.png",
+      "Images/RoundRing8.png",
+      "Images/RoundRing9.png",
+    ],
+
+    "Wedding Band": [
+      "Images/Band.png",
+      "Images/Band1.png",
+      "Images/Band2.png",
+      "Images/Band3.png",
+      "Images/Band4.png",
+      "Images/Band5.png",
+      "Images/Band6.png",
+      "Images/Band7.png",
+      "Images/Band8.png",
+    ],
+
+      "Cuban Link Chain": [
+        "Images/Cuban.png",
+        "Images/Cuban1.png",
+        "Images/Cuban2.png",
+        "Images/Cuban3.png",
+        "Images/Cuban4.png",
+        "Images/Cuban5.png",
+        "Images/Cuban6.png",
+        "Images/Cuban7.png",
+    ],
+
+      "Solara 1 Carat Moissanite Solitaire Necklace": [
+        "Images/Necklace.png",
+        "Images/Necklace1.png",
+        "Images/Necklace2.png",
+        "Images/Necklace3.png",
+      ],
+
+      "Emerald Cut Moissanite Ring": [
+        "Images/EmeraldCut.png",
+        "Images/EmeraldCut1.png",
+        "Images/EmeraldCut2.png",
+        "Images/EmeraldCut3.png",
+        "Images/EmeraldCut4.png",
+        "Images/EmeraldCut5.png",
+        "Images/EmeraldCut6.png",
+        "Images/EmeraldCut7.png",
+        "Images/EmeraldCut8.png",
+        "Images/EmeraldCut9.png",
+        "Images/EmeraldCut10.png",
+      ],
+
+      "Men Moissanite Ring": [
+        "Images/MenRing.png",
+        "Images/MenRing1.png",
+        "Images/MenRing2.png",
+        "Images/MenRing3.png",
+        "Images/MenRing4.png",
+        "Images/MenRing5.png",
+        "Images/MenRing6.png",
+        "Images/MenRing7.png",
+        "Images/MenRing8.png",
+      ],
+
+      "5 Stone Moissanite Ring":[
+        "Images/FiveStone.png",
+        "Images/Ring1.png",
+        "Images/Ring2.png",
+        "Images/Ring3.png",
+        "Images/Ring4.png",
+        "Images/Ring5.png",
+        "Images/Ring6.png",
+        "Images/Ring7.png",
+        "Images/Ring8.png",
+        "Images/Ring9.png",
+        "Images/Ring10.png",
+
+
+      ],
+
+      "Stellar Round Cut Moissanite Ring":[
+        "Images/Roundcut2.png",
+        "Images/Stellar.png",
+        "Images/Stellar1.png",
+        "Images/Stellar2.png",
+        "Images/Stellar3.png",
+        "Images/Stellar4.png",
+        "Images/Stellar5.png",
+        "Images/Stellar6.png",
+        "Images/Stellar7.png",
+        "Images/Stellar8.png",
+        "Images/Stellar9.png",
+
+      ],
+
+      "Lunar Earrings":[
+        "Images/LunarEarrings.png",
+        "Images/Lunar.png",
+        "Images/Lunar1.png",
+      ],
+
+      "One Star Bracelet":[
+        "Images/OneStar.png",
+        "Images/One.png",
+        "Images/One1.png",
+        "Images/One2.png",
+      ],
+
+      "Three Stone Moissanite Ring":[
+        "Images/ThreeStone.png",
+        "Images/ThreeStone1.png",
+        "Images/ThreeStone2.png",
+        "Images/ThreeStone3.png",
+        "Images/ThreeStone4.png",
+        "Images/ThreeStone5.png",
+        "Images/ThreeStone6.png",
+        "Images/ThreeStone7.png",
+        "Images/ThreeStone8.png",
+      ],
+
+      "Charmful Moissanite Ring": [
+        "Images/Charmful.png",
+        "Images/Charmful1.png",
+        "Images/Charmful2.png",
+        "Images/Charmful3.png",
+        "Images/Charmful4.png",
+        "Images/Charmful5.png",
+        "Images/Charmful6.png",
+        "Images/Charmful7.png",
+        "Images/Charmful8.png",
+      ],
+
+      "The Eternal Grace Ring":[
+        "Images/EternalGrace.png",
+        "Images/EternalGrace1.png",
+        "Images/EternalGrace2.png",
+        "Images/EternalGrace3.png",
+        "Images/EternalGrace4.png",
+        "Images/EternalGrace5.png",
+        "Images/EternalGrace6.png",
+      ],
+
+      "Hexa Crown Moissanite Ring":[
+        "Images/HexaCrown.png",
+        "Images/HexaCrown1.png",
+        "Images/HexaCrown2.png",
+        "Images/HexaCrown3.png",
+        "Images/HexaCrown4.png",
+        "Images/HexaCrown5.png",
+        "Images/HexaCrown6.png",
+        "Images/HexaCrown7.png",
+        "Images/HexaCrown8.png",
+        "Images/HexaCrown9.png",
+        "Images/HexaCrown10.png",
+        "Images/HexaCrown11.png",
+        "Images/HexaCrown12.png",
+      ],
+
+      "Radiant Cut Moissanite Ring":[
+        "Images/RadiantCut.png",
+        "Images/RadiantCut1.png",
+        "Images/RadiantCut2.png",
+        "Images/RadiantCut3.png",
+        "Images/RadiantCut4.png",
+        "Images/RadiantCut5.png",
+        "Images/RadiantCut6.png",
+        "Images/RadiantCut7.png",
+        "Images/RadiantCut8.png",
+        "Images/RadiantCut9.png",
+        "Images/RadiantCut10.png",
+        "Images/RadiantCut11.png",
+      ],
+
+      "Celeste Halos":[
+        "Images/CelesteHalos.png",
+        "Images/CelesteHalos1.png",
+        "Images/CelesteHalos2.png",
+        "Images/CelesteHalos3.png",
+        "Images/CelesteHalos4.png",
+      ],
+
+      "Celestial Curls":[
+        "Images/CelestialCurls.png",
+        "Images/CelestialCurls1.jpg",
+        "Images/CelestialCurls2.jpg",
+        "Images/CelestialCurls3.jpg",
+        "Images/CelestialCurls4.jpg",
+        "Images/CelestialCurls5.jpg",
+        "Images/CelestialCurls6.jpg",
+      ],
+
+      "The Regal Heart":[
+        "Images/heart.png",
+        "Images/heart2.png",
+        "Images/heart3.jpg",
+        "Images/heart4.jpg",
+      ],
+
+      "The Timeless Oval":[
+        "Images/Goose.png",
+        "Images/Goose1.jpg",
+        "Images/Goose2.jpg",
+        "Images/Goose3.jpg",
+      ],
+
+      "Starlight Studs":[
+        "Images/StarlightStuds.png",
+        "Images/StarlightStuds1.jpg",
+        "Images/StarlightStuds2.png",
+      ],
+
+  // Add more as needed
+};
+
+// ✅ Add product-specific options here
+const productOptions = {
+  "Solara 1 Carat Moissanite Solitaire Necklace": {
+    sizeLabel: "Select Chain Length (inches)",
+    sizes: ["16\"", "18\"", "20\"", "22\""],
+    carats: ["1 Carat", "2 Carat", "3 Carat"]
+  },
+  "Wedding Band": {
+    sizeLabel: "Select Ring Size",
+    sizes: ["5", "6", "7", "8", "9"],
+    carats: []
+  },
+  // more if needed...
+};
+
+let currentImages = [];
+let currentIndex = 0;
+
+  
+    // Cart variables
+    let cartTotal = 0;
+    let cartCount = 0;
+    const cartItemsList = document.getElementById("cartItems");
+    const cartCountDisplay = document.getElementById("cartCount");
+  
+    // Load saved cart from localStorage
+   
+// No reliable price parsing, so no cartTotal calculation here
+cartCountDisplay.innerText = cartCount;
+cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+
+  
+    document.getElementById("totalPrice").innerText = cartTotal.toFixed(2);
+    cartCountDisplay.innerText = cartCount;
+    cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+
+    // ✅ Place here before .forEach(card => { ... })
+
+// ✅ Carat option updater
+function updateCaratOptions(productTitle) {
+  const caratSelect = document.getElementById("caratSelect");
+  caratSelect.innerHTML = "";
+  let maxCarat = productTitle.includes("Necklace") ? 3 : 5;
+  for (let i = 1; i <= maxCarat; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = `${i} Carat`;
+    caratSelect.appendChild(option);
+  }
+}
+
+const savedCart = JSON.parse(localStorage.getItem("cartItems") || "[]");
+savedCart.forEach(textItem => {
+  const li = document.createElement("li");
+  li.innerHTML = `${textItem} 
+    <button class="removeBtn" style="float:right; background:none; border:none; color:red; font-weight:bold; cursor:pointer;">×</button>`;
+
+  li.querySelector('.removeBtn').onclick = () => {
+    cartItemsList.removeChild(li);
+    cartCount--;
+    cartCountDisplay.innerText = cartCount;
+    cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+    updateLocalStorage();
+  };
+
+  cartItemsList.appendChild(li);
+  cartCount++;
+});
+
+cartCountDisplay.innerText = cartCount;
+cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+
+// ✅ Save Function
+function updateLocalStorage() {
+  const updatedCart = Array.from(cartItemsList.children).map(li => li.innerText.split(' ×')[0]);
+  localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+}
+
+
+  
+  document.querySelectorAll(".product-card").forEach(setupProductModal);
+
+function setupProductModal(card) {
+  card.addEventListener("click", () => {
+    const img = card.querySelector("img").src;
+    const title = card.dataset.title;
+    const price = card.querySelector("p").innerText;
+
+    updateCaratOptions(title);
+
+    currentImages = productImages[title] || [img];
+    currentIndex = 0;
+    modalImg.src = currentImages[currentIndex];
+    modalTitle.innerText = title;
+    modalPrice.innerText = price;
+    modalDesc.innerText = productDescriptions[title] || "Premium 925 Sterling Silver and VVS1 Moissanite.";
+
+    const ringOptions = document.getElementById("ringOptions");
+    const chainOptions = document.getElementById("chainOptions");
+    const sizeSelect = document.getElementById("sizeSelect");
+    const caratSelect = document.getElementById("caratSelect");
+    const lengthSelect = resetSelectListener(document.getElementById("lengthSelect"));
+    const widthSelect = resetSelectListener(document.getElementById("widthSelect"));
+
+     if (title.includes("Moissanite") && 
+        !title.includes("5 Stone Moissanite Ring") && 
+        !title.includes("Three Stone Moissanite Ring")) {
+
+      const caratPricing = {
+        "1": 90,
+        "2": 110,
+        "3": 130,
+        "4": 150,
+        "5": 170
+      };
+
+      const updateCaratPrice = () => {
+        const selectedCarat = caratSelect.value;
+        const price = caratPricing[selectedCarat] || 90;
+        modalPrice.innerText = `$${price.toFixed(2)}`;
+      };
+
+      caratSelect.onchange = updateCaratPrice;
+      updateCaratPrice();
+    }
+
+    // Reset all option displays
+    ringOptions.style.display = "none";
+    chainOptions.style.display = "none";
+    sizeSelect.style.display = "block";
+    document.querySelector('label[for="sizeSelect"]').style.display = "block";
+    caratSelect.style.display = "block";
+    document.querySelector('label[for="caratSelect"]').style.display = "block";
+
+    if (title.includes("Chain")) {
+      chainOptions.style.display = "block";
+
+      if (title.includes("Cuban Link Chain")) {
+        widthSelect.innerHTML = `<option value="14">14 mm</option>`;
+        widthSelect.style.display = "none";
+        document.querySelector('label[for="widthSelect"]').style.display = "none";
+
+        const cubanChainPricing = { "16": 60, "18": 62, "20": 64, "22": 66, "24": 68 };
+        const updateCubanPrice = () => {
+          const price = cubanChainPricing[lengthSelect.value] || 60;
+          modalPrice.innerText = `$${price.toFixed(2)}`;
+        };
+
+        lengthSelect.onchange = updateCubanPrice;
+        updateCubanPrice();
+
+      } else if (title.includes("Italian Sterling Silver Chain")) {
+        widthSelect.style.display = "block";
+        document.querySelector('label[for="widthSelect"]').style.display = "block";
+
+        const italianChainPricing = {
+          "16-2": 60, "16-3": 65, "16-4": 70, "16-5": 75, "16-6": 80,
+          "18-2": 62, "18-3": 67, "18-4": 72, "18-5": 77, "18-6": 82,
+          "20-2": 64, "20-3": 69, "20-4": 74, "20-5": 79, "20-6": 84,
+          "22-2": 66, "22-3": 71, "22-4": 76, "22-5": 81, "22-6": 86,
+          "24-2": 68, "24-3": 73, "24-4": 78, "24-5": 83, "24-6": 88
+        };
+
+        const updateItalianPrice = () => {
+          const key = `${lengthSelect.value}-${widthSelect.value}`;
+          const price = italianChainPricing[key] || 60;
+          modalPrice.innerText = `$${price.toFixed(2)}`;
+        };
+
+        lengthSelect.onchange = updateItalianPrice;
+        widthSelect.onchange = updateItalianPrice;
+        updateItalianPrice();
+      }
+
+    } else if (title.includes("Celestial Curls") || title.includes("Bracelet") || title.includes("Earrings")) {
+      ringOptions.style.display = "none";
+      chainOptions.style.display = "none";
+
+    } else if (title.includes("5 Stone Moissanite Ring") || title.includes("Three Stone Moissanite Ring")) {
+      ringOptions.style.display = "block";
+      caratSelect.style.display = "none";
+      document.querySelector('label[for="caratSelect"]').style.display = "none";
+
+    } else if (title.includes("Celeste Halos")) {
+      ringOptions.style.display = "none";
+      sizeSelect.style.display = "none";
+      document.querySelector('label[for="sizeSelect"]').style.display = "none";
+      caratSelect.style.display = "none";
+      document.querySelector('label[for="caratSelect"]').style.display = "none";
+
+    } else if (title.includes("Starlight Studs")) {
+      ringOptions.style.display = "block";
+      sizeSelect.style.display = "none";
+      document.querySelector('label[for="sizeSelect"]').style.display = "none";
+      caratSelect.innerHTML = `<option value="1">1 Carat</option><option value="2">2 Carat</option><option value="3">3 Carat</option>`;
+      caratSelect.style.display = "block";
+      document.querySelector('label[for="caratSelect"]').style.display = "block";
+
+    } else if (title.includes("Wedding Band")) {
+      ringOptions.style.display = "block";
+      chainOptions.style.display = "none";
+      caratSelect.style.display = "none";
+      document.querySelector('label[for="caratSelect"]').style.display = "none";
+
+    } else if (title.includes("Necklace")) {
+      ringOptions.style.display = "block";
+      chainOptions.style.display = "none";
+      document.querySelector('label[for="sizeSelect"]').innerText = "Select Length (inches):";
+      sizeSelect.innerHTML = `<option value="16">16 inches</option><option value="18">18 inches</option><option value="20">20 inches</option><option value="22">22 inches</option><option value="24">24 inches</option>`;
+      caratSelect.innerHTML = `<option value="1">1 Carat</option><option value="2">2 Carat</option><option value="3">3 Carat</option>`;
+      caratSelect.style.display = "block";
+      document.querySelector('label[for="caratSelect"]').style.display = "block";
+
+    } else {
+      ringOptions.style.display = "block";
+      chainOptions.style.display = "none";
+      document.querySelector('label[for="sizeSelect"]').innerText = "Select Ring Size:";
+      sizeSelect.innerHTML = `<option value="5">Size 5</option><option value="6">Size 6</option><option value="7">Size 7</option><option value="8">Size 8</option><option value="9">Size 9</option>`;
+      caratSelect.innerHTML = `<option value="1">1 Carat</option><option value="2">2 Carat</option><option value="3">3 Carat</option><option value="4">4 Carat</option><option value="5">5 Carat</option>`;
+      caratSelect.style.display = "block";
+      document.querySelector('label[for="caratSelect"]').style.display = "block";
+    }
+
+    modal.style.display = "flex";
+
+        const addToCartBtn = document.getElementById("addToCartBtn");
+    addToCartBtn.onclick = () => {
+      const size = sizeSelect?.value || "";
+      const carat = caratSelect?.value || "";
+      const length = lengthSelect?.value || "";
+      const width = widthSelect?.value || "";
+      const priceText = modalPrice.innerText;
+      const priceValue = parseFloat(priceText.replace('$', ''));
+      let details = "";
+
+      if (length && width) {
+        details = ` - ${length} inches, ${width} mm`;
+      } else if (length) {
+        details = ` - ${length} inches`;
+      } else if (size) {
+        details = ` - Size ${size}`;
+      }
+      if (carat) {
+        details += `, ${carat} Carat`;
+      }
+
+      const li = document.createElement("li");
+      li.innerHTML = `${title}${details} - $${priceValue.toFixed(2)} 
+        <button class="removeBtn" style="float:right; background:none; border:none; color:red; font-weight:bold; cursor:pointer;">×</button>`;
+
+      li.querySelector('.removeBtn').onclick = () => {
+        cartItemsList.removeChild(li);
+        cartTotal -= priceValue;
+        cartCount--;
+        document.getElementById("totalPrice").innerText = cartTotal.toFixed(2);
+        cartCountDisplay.innerText = cartCount;
+        cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+      };
+
+      cartItemsList.appendChild(li);
+      cartTotal += priceValue;
+      cartCount++;
+      document.getElementById("totalPrice").innerText = cartTotal.toFixed(2);
+      cartCountDisplay.innerText = cartCount;
+      cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+
+      alert(`Added to cart:\n${title}${details}`);
+    };
+
+  });
+}
+
+
+// Fallback price updater for chains or other static prices
+const updateDisplayedPrice = () => {
+  let price = 0;
+
+  if (title.includes("Italian Sterling Silver Chain")) {
+    const key = `${lengthSelect.value}-${widthSelect.value}`;
+    price = {
+      "16-2": 60, "16-3": 65, "16-4": 70, "16-5": 75, "16-6": 80,
+      "18-2": 62, "18-3": 67, "18-4": 72, "18-5": 77, "18-6": 82,
+      "20-2": 64, "20-3": 69, "20-4": 74, "20-5": 79, "20-6": 84,
+      "22-2": 66, "22-3": 71, "22-4": 76, "22-5": 81, "22-6": 86,
+      "24-2": 68, "24-3": 73, "24-4": 78, "24-5": 83, "24-6": 88
+    }[key] || 60;
+
+  } else if (title.includes("Cuban Link Chain")) {
+    price = { "16": 60, "18": 62, "20": 64, "22": 66, "24": 68 }[lengthSelect.value] || 70;
+
+  } else {
+    price = 90;
+  }
+
+  modalPrice.innerText = `$${price.toFixed(2)}`;
+};
+
+lengthSelect.onchange = updateDisplayedPrice;
+widthSelect.onchange = updateDisplayedPrice;
+
+document.getElementById("prevImg").onclick = () => {
+  if (currentImages.length > 1) {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    modalImg.src = currentImages[currentIndex];
+  }
+};
+
+document.getElementById("nextImg").onclick = () => {
+  if (currentImages.length > 1) {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    modalImg.src = currentImages[currentIndex];
+  }
+};
+  
+    closeBtn.onclick = () => modal.style.display = "none";
+  
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  
+    const cartBtn = document.getElementById("cartBtn");
+    const cartPanel = document.getElementById("cartPanel");
+    const closeCart = document.getElementById("closeCart");
+  
+    cartBtn.onclick = () => {
+      cartPanel.classList.add("open");
+    };
+  
+    closeCart.onclick = () => {
+      cartPanel.classList.remove("open");
+    };
+  
+    document.getElementById("addToCartBtn").onclick = () => {
+  const size = document.getElementById("sizeSelect")?.value || "";
+  const carat = document.getElementById("caratSelect")?.value || "";
+  const length = document.getElementById("lengthSelect")?.value || "";
+  const width = document.getElementById("widthSelect")?.value || "";
+  const product = document.getElementById("modalTitle").innerText;
+ const priceText = document.getElementById("modalPrice").innerText || "$0.00";
+  let priceValue = parseFloat(priceText.replace('$', ''));
+  priceValue = isNaN(priceValue) ? 0 : priceValue;
+  priceValue = priceValue.toFixed(2);
+
+
+if (isNaN(priceValue)) {
+  alert("Could not extract price from the product. Please select a valid product.");
+  return;
+}
+
+
+  let details = "";
+  if (length && width) {
+    details = ` - ${length} inches, ${width} mm`;
+  } else if (length) {
+    details = ` - ${length} inches`;
+  } else if (size) {
+    details = ` - Size ${size}`;
+  }
+  if (carat) {
+    details += `, ${carat} Carat`;
+  }
+
+  const item = document.createElement("li");
+  item.innerHTML = `${product}${details} - $${priceValue.toFixed(2)} 
+    <button class="removeBtn" style="float:right; background:none; border:none; color:red; font-weight:bold; cursor:pointer;">×</button>`;
+
+  item.querySelector('.removeBtn').onclick = () => {
+    cartItemsList.removeChild(item);
+    cartTotal -= priceValue;
+    cartCount--;
+    document.getElementById("totalPrice").innerText = cartTotal.toFixed(2);
+    cartCountDisplay.innerText = cartCount;
+    cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+
+    updateLocalStorage();
+  };
+
+  cartItemsList.appendChild(item);
+  cartTotal += priceValue;
+  cartCount++;
+  document.getElementById("totalPrice").innerText = cartTotal.toFixed(2);
+  cartCountDisplay.innerText = cartCount;
+  cartCountDisplay.style.display = cartCount > 0 ? 'inline-block' : 'none';
+
+  updateLocalStorage();
+
+  function updateLocalStorage() {
+    const updatedCart = Array.from(cartItemsList.children).map(li => li.innerText);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  }
+
+  alert(`Added to cart:\n${product}${details}`);
+};
+
+  
+ document.getElementById("buyNowBtn").onclick = () => {
+  const product = document.getElementById("modalTitle").innerText;
+  const selectedCarat = document.getElementById("caratSelect")?.value;
+  const lengthSelect = document.getElementById("lengthSelect")?.value;
+  const widthSelect = document.getElementById("widthSelect")?.value;
+
+  let priceId;
+
+  // ✅ Check product-specific carat mapping first
+  if (caratPriceIdMap[product] && caratPriceIdMap[product][selectedCarat]) {
+    priceId = caratPriceIdMap[product][selectedCarat];
+
+  } else if (product.includes("Italian Sterling Silver Chain")) {
+    const key = `${lengthSelect}-${widthSelect}`;
+    priceId = italianChainPriceIdMap[key];
+
+  } else if (product.includes("Cuban Link Chain")) {
+    priceId = cubanChainPriceIdMap[lengthSelect];
+
+  } else {
+    priceId = priceIdMap[product];
+  }
+
+  if (!priceId) {
+    alert("Sorry, this product is not available for checkout yet.");
+    return;
+  }
+
+  fetch('http://localhost:4242/create-checkout-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ price_id: priceId })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      console.error('No checkout URL returned:', data);
+      alert('Checkout failed. Please try again.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+};
+
+
+
+
+  
+  document.querySelectorAll("#checkoutBtn, #cartCheckoutBtn").forEach(button => {
+  button.onclick = () => {
+    const cartItems = document.querySelectorAll('#cartItems li');
+
+    if (cartItems.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
+
+    const lineItems = [];
+
+    cartItems.forEach(item => {
+      const productName = item.textContent.split(' - ')[0];
+
+      // Extract carat if available
+      const caratMatch = item.textContent.match(/(\d) Carat/);
+      const selectedCarat = caratMatch ? caratMatch[1] : null;
+
+      // Extract chain options if available
+      const lengthMatch = item.textContent.match(/(\d+) inches/);
+      const widthMatch = item.textContent.match(/(\d+) mm/);
+      const length = lengthMatch ? lengthMatch[1] : null;
+      const width = widthMatch ? widthMatch[1] : null;
+
+      let priceId;
+
+      if (caratPriceIdMap[productName] && selectedCarat && caratPriceIdMap[productName][selectedCarat]) {
+        priceId = caratPriceIdMap[productName][selectedCarat];
+      } else if (productName.includes("Italian Sterling Silver Chain")) {
+        const key = `${length}-${width}`;
+        priceId = italianChainPriceIdMap[key];
+      } else if (productName.includes("Cuban Link Chain")) {
+        priceId = cubanChainPriceIdMap[length];
+      } else {
+        priceId = priceIdMap[productName];
+      }
+
+      if (!priceId) {
+  console.warn(`No priceId found for ${productName} with carat ${selectedCarat}, length ${length}, width ${width}`);
+}
+
+      if (priceId) {
+        lineItems.push({
+          price: priceId,
+          quantity: 1
+        });
+      }
+    });
+
+    if (lineItems.length === 0) {
+      alert("No valid products found in your cart.");
+      return;
+    }
+
+    fetch('http://localhost:4242/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ line_items: lineItems })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Checkout failed. No URL returned.');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  };
+});
+
+
+
+document.getElementById("stripeCheckoutBtn").onclick = () => {
+  const cartItems = document.querySelectorAll('#cartItems li');
+
+  if (cartItems.length === 0) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+  const lineItems = [];
+
+  cartItems.forEach(item => {
+    const productName = item.textContent.split(' - ')[0];
+
+    const caratMatch = item.textContent.match(/(\d) Carat/);
+    const selectedCarat = caratMatch ? caratMatch[1] : null;
+
+    const lengthMatch = item.textContent.match(/(\d+) inches/);
+    const widthMatch = item.textContent.match(/(\d+) mm/);
+    const length = lengthMatch ? lengthMatch[1] : null;
+    const width = widthMatch ? widthMatch[1] : null;
+
+    let priceId;
+
+    if (caratPriceIdMap[productName] && selectedCarat && caratPriceIdMap[productName][selectedCarat]) {
+      priceId = caratPriceIdMap[productName][selectedCarat];
+    } else if (productName.includes("Italian Sterling Silver Chain")) {
+      const key = `${length}-${width}`;
+      priceId = italianChainPriceIdMap[key];
+    } else if (productName.includes("Cuban Link Chain")) {
+      priceId = cubanChainPriceIdMap[length];
+    } else {
+      priceId = priceIdMap[productName];
+    }
+
+    if (priceId) {
+      lineItems.push({
+        price: priceId,
+        quantity: 1
+      });
+    }
+  });
+
+  if (lineItems.length === 0) {
+    alert("No valid products found in your cart.");
+    return;
+  }
+
+  fetch('http://localhost:4242/create-checkout-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ line_items: lineItems })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      console.error('No checkout URL returned:', data);
+      alert('Checkout failed. Please try again.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+};
+
+});
+ </script>
+ 
+</body>
+</html>

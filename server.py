@@ -1,0 +1,56 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import stripe
+
+stripe.api_key = "sk_test_51RKOjYFLy2fLmwrk9xXGnIRn0zH1YvClcIajMda1ySNOYDqAA7FBz0JkuHHHXiZorSfwSl5ldfVIxbJ0MWSH5glQ00b8nl6ThV"
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    data = request.json
+
+    # Logging the incoming request data for debugging
+    print('Received request data:', data)
+
+    # Handle multiple line items or fallback to single price_id
+    line_items = data.get('line_items')
+    print('Line items:', line_items)  # Log the parsed line items
+
+    if not line_items:
+        price_id = data.get('price_id')
+        print('Single price_id fallback:', price_id)  # Log single price_id fallback
+        if not price_id:
+            return jsonify(error="No price_id or line_items provided"), 400
+        line_items = [{'price': price_id, 'quantity': 1}]
+
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=line_items,
+            mode='payment',
+            shipping_options=[{
+                'shipping_rate_data': {
+                    'type': 'fixed_amount',
+                    'fixed_amount': {
+                        'amount': 2000,
+                        'currency': 'cad',
+                    },
+                    'display_name': 'Standard Shipping (2-3 Weeks)',
+                    'delivery_estimate': {
+                        'minimum': {'unit': 'week', 'value': 2},
+                        'maximum': {'unit': 'week', 'value': 3},
+                    },
+                },
+            }],
+            success_url='http://localhost:5500/success.html',
+            cancel_url='http://localhost:5500/cancel.html',
+        )
+        return jsonify({'url': checkout_session.url})
+    except Exception as e:
+        print('Stripe API Error:', str(e))  # Log any Stripe errors
+        return jsonify(error=str(e)), 403
+
+if __name__ == '__main__':
+    app.run(port=4242)
