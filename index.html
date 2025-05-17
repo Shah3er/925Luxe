@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>925 Luxe | Premium Moissanite Jewelry</title>
+  <meta name="description" content="Shop 925 Luxe for premium Moissanite and Sterling Silver jewelry. Canadian based, diamond tester verified, and GRA certified.">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
    <script src="https://js.stripe.com/v3/"></script>
   <style>
@@ -1562,7 +1563,7 @@ if (isNaN(priceValue)) {
     return;
   }
 
-  fetch('http://localhost:4242/create-checkout-session', {
+  fetch('https://nine25luxe.onrender.com/create-checkout-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ price_id: priceId })
@@ -1637,7 +1638,7 @@ if (isNaN(priceValue)) {
       return;
     }
 
-    fetch('http://localhost:4242/create-checkout-session', {
+    fetch('https://nine25luxe.onrender.com/create-checkout-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ line_items: lineItems })
@@ -1703,7 +1704,7 @@ document.getElementById("stripeCheckoutBtn").onclick = () => {
     return;
   }
 
-  fetch('http://localhost:4242/create-checkout-session', {
+  fetch('https://nine25luxe.onrender.com/create-checkout-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ line_items: lineItems })
