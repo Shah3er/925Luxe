@@ -46,8 +46,9 @@ def create_checkout_session():
                     },
                 },
             }],
-            success_url='http://localhost:5500/success.html',
-            cancel_url='http://localhost:5500/cancel.html',
+            success_url='https://925luxe.ca/success.html',
+            cancel_url='https://925luxe.ca/cancel.html',
+
         )
         return jsonify({'url': checkout_session.url})
     except Exception as e:
