@@ -1563,7 +1563,7 @@ if (isNaN(priceValue)) {
     return;
   }
 
-  fetch('https://nine25luxe.onrender.com/create-checkout-session', {
+  fetch('https://nine25luxebackend.onrender.com/create-checkout-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ price_id: priceId })
@@ -1638,7 +1638,7 @@ if (isNaN(priceValue)) {
       return;
     }
 
-    fetch('https://nine25luxe.onrender.com/create-checkout-session', {
+    fetch('https://nine25luxebackend.onrender.com/create-checkout-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ line_items: lineItems })
