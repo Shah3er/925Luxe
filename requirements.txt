@@ -2,3 +2,4 @@ flask
 flask-cors
 stripe
 python-dotenv
+gunicorn
