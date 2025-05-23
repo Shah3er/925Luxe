@@ -29,9 +29,13 @@ def create_checkout_session():
 
     try:
         checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=line_items,
-            mode='payment',
+    payment_method_types=['card'],
+    line_items=line_items,
+    mode='payment',
+    customer_email=data.get('email'),  # Optional: passed from client
+    shipping_address_collection={
+        'allowed_countries': ['CA', 'US']
+    },
             shipping_options=[{
                 'shipping_rate_data': {
                     'type': 'fixed_amount',
@@ -48,7 +52,6 @@ def create_checkout_session():
             }],
             success_url='https://925luxe.ca/success.html',
             cancel_url='https://925luxe.ca/cancel.html',
-
         )
         return jsonify({'url': checkout_session.url})
     except Exception as e:
@@ -56,6 +59,4 @@ def create_checkout_session():
         return jsonify(error=str(e)), 403
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-
+    app.run(port=4242)
